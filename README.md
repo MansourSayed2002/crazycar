@@ -23,3 +23,20 @@ Inspired by platforms like Uber, the app allows users to sign up as either a dri
 ![register_Screen](screenshots/register_screen.jpg)
 ![loading](screenshots/loading.jpg)
 ![opt_Screen](screenshots/opt_screen.jpg)
+
+
+## 🛠️ Technologies used
+
+- Flutter
+- flutter_screenutil
+- easy_localization
+- Supabase database and storage
+- flutter_dotenv
+- BLoC (State Management)
+- get_it
+- Hive
+- hive_flutter
+- hive_generator
+- shared_preferences
+
+
