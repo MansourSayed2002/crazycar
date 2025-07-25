@@ -7,10 +7,18 @@ Inspired by platforms like Uber, the app allows users to sign up as either a dri
 
 ## 🖼️ Pictures from the application
 
-### 🔐 Login page
-
+### 🔐 splash page
 ![splash_native](screenshots/splash_native.jpg)
 ![splash_Screen](screenshots/splash_Screen.jpg)
+
+### 🔐 onboarding page
+
+![onboarding_Screen](screenshots/onboarding_Screen.jpg)
+
+
+### 🔐 Login page
+
+
 ![Login_Screen](screenshots/Login_Screen.jpg)
 ![register_Screen](screenshots/register_Screen.jpg)
 ![opt_Screen](screenshots/opt_Screen.jpg)
