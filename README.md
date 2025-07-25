@@ -13,12 +13,13 @@ Inspired by platforms like Uber, the app allows users to sign up as either a dri
 
 ### 🔐 onboarding page
 
-![onboarding_Screen](screenshots/onboarding_Screen.jpg)
+![onboarding_Screen](screenshots/onboarding_screen.jpg)
 
 
 ### 🔐 Login page
 
 
-![Login_Screen](screenshots/Login_Screen.jpg)
-![register_Screen](screenshots/register_Screen.jpg)
-![opt_Screen](screenshots/opt_Screen.jpg)
+![Login_Screen](screenshots/login_screen.jpg)
+![register_Screen](screenshots/register_screen.jpg)
+![loading](screenshots/loading.jpg)
+![opt_Screen](screenshots/opt_screen.jpg)
