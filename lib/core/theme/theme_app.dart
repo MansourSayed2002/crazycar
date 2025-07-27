@@ -6,12 +6,14 @@ class ThemeApp {
   static ThemeData light = ThemeData(
     scaffoldBackgroundColor: ColorApp.backgroundColorLight,
     fontFamily: "SpaceGrotesk",
+    appBarTheme: AppBarTheme(backgroundColor: ColorApp.backgroundColorLight),
     colorScheme: ColorScheme.fromSeed(
       seedColor: ColorApp.whiteColor,
       onSurface: ColorApp.blackColor,
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
+      suffixIconColor: ColorApp.hintTextColorLight,
       hintStyle: TextStyle(
         fontSize: 16.0.sp,
         color: ColorApp.hintTextColorLight,
@@ -35,12 +37,15 @@ class ThemeApp {
   static ThemeData dark = ThemeData(
     scaffoldBackgroundColor: ColorApp.backgroundColorDark,
     fontFamily: "SpaceGrotesk",
+    appBarTheme: AppBarTheme(backgroundColor: ColorApp.backgroundColorDark),
     colorScheme: ColorScheme.fromSeed(
       seedColor: ColorApp.blackColor,
       onSurface: ColorApp.whiteColor,
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
+      suffixIconColor: ColorApp.hintTextColorDark,
+
       hintStyle: TextStyle(
         fontSize: 16.0.sp,
         color: ColorApp.hintTextColorDark,
