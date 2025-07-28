@@ -1,1 +1,37 @@
-{}
+{
+    "verification": {
+        "wrong_number": "Please enter the correct number",
+        "wrong_text": "Please enter the correct name",
+        "wrong_email": "Please enter the correct email",
+        "wrong_empty": "Cannot leave everything in the field",
+        "wrong_max": "Cannot contain the largest amount of the field",
+        "wrong_min": "Cannot contain the smallest amount of the field"
+    },
+    "datapage":{
+        "desPage1":"Take a front photo of your national ID card.",
+        "desPage2":"Take a background photo for your national ID card.",
+        "desPage3":"Take a photo of yourself with your national ID card."
+    },
+    "login":"Login",
+    "phone_number":"Phone Number",
+    "footer_text_login":"Don't have an account? Create one",
+    "create_account":"Create Account",
+    "full_name":"Full Name",
+    "email":"Email",
+    "rider":"Rider",
+    "driver":"Driver",
+    "upload_image_profile":"Upload Profile Picture ",
+    "footer_text_register":"Already have an account? Login",
+    "complete_register":" Complete Register",
+    "open_camera":"Open Camera",
+    "upload_image":"Upload Image",
+    "select_role":"Select your role",
+    "i_rider":"I am a Rider",
+    "i_driver":"I am a Driver",
+    "select":"Select",
+    "verify":"Verification",
+    "body_verify":"Enter the code to confirm your account",
+    "send_code":"Send Code"
+
+
+}

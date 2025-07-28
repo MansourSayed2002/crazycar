@@ -1,4 +1,33 @@
 class TextApp {
   static const String appName = 'CrazyCar';
   static const String loading = 'Loading';
+  static const String login = 'login';
+  static const String phoneNumber = 'phone_number';
+  static const String footerTextLogin = 'footer_text_login';
+  static const String createAccount = 'create_account';
+  static const String fullName = 'full_name';
+  static const String email = 'email';
+  static const String rider = 'rider';
+  static const String driver = 'driver';
+  static const String uploadImageProfile = 'upload_image_profile';
+  static const String footerTextRegister = 'footer_text_register';
+  static const String wrongNumber = 'verification.wrong_number';
+  static const String wrongText = 'verification.wrong_text';
+  static const String wrongEmail = 'verification.wrong_email';
+  static const String wrongEmpty = 'verification.wrong_empty';
+  static const String wrongMax = 'verification.wrong_max';
+  static const String wrongMin = 'verification.wrong_min';
+  static const String desPage1 = 'datapage.desPage1';
+  static const String desPage2 = 'datapage.desPage2';
+  static const String desPage3 = 'datapage.desPage3';
+  static const String completeRegister = 'complete_register';
+  static const String openCamera = 'open_camera';
+  static const String uploadImage = 'upload_image';
+  static const String selectRole = 'select_role';
+  static const String iDriver = 'i_driver';
+  static const String iRider = 'i_rider';
+  static const String select = 'select';
+  static const String verify = 'verify';
+  static const String bodyVerify = 'body_verify';
+  static const String sendCode = 'send_code';
 }
