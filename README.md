@@ -1,3 +1,8 @@
+
+# crazycar
+
+A new Flutter project.
+
 # 🚗 CrazyCar – Smart Ride Sharing App for Drivers & Riders
 
 ## 🚀 Project Description
@@ -38,5 +43,6 @@ Inspired by platforms like Uber, the app allows users to sign up as either a dri
 - hive_flutter
 - hive_generator
 - shared_preferences
+
 
 

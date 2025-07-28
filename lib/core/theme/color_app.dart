@@ -18,4 +18,5 @@ class ColorApp {
   static const Color hintTextColorLight = Color(0xFF4A879C);
   static const Color blackColor = Color(0xFF0D171C);
   static const Color whiteColor = Colors.white;
+  static const Color redColor = Colors.red;
 }
