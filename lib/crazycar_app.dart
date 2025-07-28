@@ -1,4 +1,5 @@
 import 'package:crazycar/core/theme/theme_app.dart';
+import 'package:crazycar/features/driver/home/presentation/screen/driver_home_screen.dart';
 import 'package:crazycar/features/intro/screen/splash_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class CrazycarApp extends StatelessWidget {
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
           locale: context.locale,
-          home: SplashScreen(),
+          home: DriverHomeScreen(),
         );
       },
     );
