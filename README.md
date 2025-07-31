@@ -1,7 +1,5 @@
 
-# crazycar
 
-A new Flutter project.
 
 # 🚗 CrazyCar – Smart Ride Sharing App for Drivers & Riders
 
