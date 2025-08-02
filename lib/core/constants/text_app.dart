@@ -30,4 +30,9 @@ class TextApp {
   static const String verify = 'verify';
   static const String bodyVerify = 'body_verify';
   static const String sendCode = 'send_code';
+  static const String completedSuccess = 'completed_success';
+  static const String error = 'error';
+  static const String violatesUniquePhone = 'violate_unique_phone';
+  static const String violatesUniqueToken = 'violate_unique_token';
+  static const String errorLogin = 'error_login';
 }

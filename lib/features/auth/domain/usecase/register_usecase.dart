@@ -1,12 +1,12 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:crazycar/core/class/api_result.dart';
 import 'package:crazycar/core/class/local_storage.dart';
 import 'package:crazycar/core/constants/tables_database_app.dart';
 import 'package:crazycar/core/enum/status_request.dart';
 import 'package:crazycar/core/enum/type_user.dart';
 import 'package:crazycar/core/function/get_token.dart';
+import 'package:crazycar/core/function/handling_error.dart';
 import 'package:crazycar/features/auth/data/model/remote/user_model.dart';
 import 'package:crazycar/features/auth/domain/repo_abs/auth_repo_abs.dart';
 
@@ -20,29 +20,32 @@ class RegisterUsecase {
   ) async {
     try {
       String token = await getToken();
+      final prefix = type == TypeUser.driver ? 'driver' : 'rider';
       List response = await authRepoAbs.register({
-        type == TypeUser.driver ? "driver_name" : "rider_name": data.userName,
-        type == TypeUser.driver ? "driver_email" : "rider_email":
-            data.userEmail,
-        type == TypeUser.driver ? "driver_phone" : "rider_phone":
-            data.userPhone,
-        type == TypeUser.driver ? "driver_token" : "rider_token": token,
+        "${prefix}_name": data.userName,
+        "${prefix}_email": data.userEmail,
+        "${prefix}_phone": data.userPhone,
+        "${prefix}_token": token,
       }, type);
       LocalStorageApp.setHiveData(
         "user_data",
         UserModel.fromJson(response.first),
       );
-      UserModel user = await LocalStorageApp.getHiveData("user_data");
-      await authRepoAbs.uplaodImageUser(
-        image.first,
-        "${TablesDatabaseApp.imagePathProfile}/${user.userId}/${image.first.toString().split("/").last}",
-        user.userPhone.toString(),
-        type,
-      );
+      await uploadImage(prefix, image, type);
       return ApiSuccess(StatusRequest.success);
     } catch (e) {
       log(e.toString());
-      return ApiFailure(StatusRequest.serverfailure);
+      return handleError(e);
     }
+  }
+
+  Future<void> uploadImage(prefix, image, type) async {
+    UserModel user = await LocalStorageApp.getHiveData("user_data");
+    await authRepoAbs.uplaodImageUser(
+      image.first,
+      "$prefix/${TablesDatabaseApp.imagePathProfile}/${user.userId}/${image.first.toString().split("/").last.split("'").first}",
+      user.userPhone.toString(),
+      type,
+    );
   }
 }

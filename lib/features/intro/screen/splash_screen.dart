@@ -1,9 +1,9 @@
 import 'package:crazycar/core/constants/image_app.dart';
 import 'package:crazycar/core/constants/text_app.dart';
 import 'package:crazycar/core/extension/navigator_app.dart';
+import 'package:crazycar/core/function/middleware.dart';
 import 'package:crazycar/core/theme/color_app.dart';
 import 'package:crazycar/core/theme/textstyle_app.dart';
-import 'package:crazycar/features/intro/screen/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(seconds: 4), () {
-        context.pushRepalceMent(OnboardingScreen());
+        context.pushRepalceMent(middleWare());
       });
     });
     super.initState();

@@ -1,6 +1,7 @@
 import 'package:crazycar/core/constants/text_app.dart';
 import 'package:crazycar/core/enum/type_user.dart';
 import 'package:crazycar/core/extension/navigator_app.dart';
+import 'package:crazycar/core/function/cong_widget.dart';
 import 'package:crazycar/core/function/error_widget.dart';
 import 'package:crazycar/core/function/loading_widget.dart';
 import 'package:crazycar/core/function/validation.dart';
@@ -19,6 +20,7 @@ import 'package:gap/gap.dart';
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key, required this.type});
   final TypeUser type;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -39,10 +41,11 @@ class RegisterScreen extends StatelessWidget {
                 context.push(CompleteRegisterScreen());
               } else {
                 context.pop();
+                congWidget(context);
               }
             } else if (state is RegisterError) {
               context.pop();
-              errorWidget(context);
+              errorWidget(context: context, isText: true, text: state.message);
             } else if (state is RegisterLoading) {
               loadingWidget(context);
             }

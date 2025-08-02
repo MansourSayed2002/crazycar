@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:crazycar/core/class/api_result.dart';
 import 'package:crazycar/core/enum/type_user.dart';
@@ -46,8 +45,9 @@ class AuthCubit extends Cubit<AuthState> {
     );
     if (response is ApiSuccess) {
       emit(LogInSuccess());
+      userPhoneNumberController.clear();
     } else if (response is ApiFailure) {
-      emit(LogInError());
+      emit(LogInError(message: response.message));
     }
   }
 
@@ -68,6 +68,7 @@ class AuthCubit extends Cubit<AuthState> {
       );
       if (resposne is ApiSuccess) {
         emit(VerifyCodeSuccess());
+        optController.clear();
       } else if (resposne is ApiFailure) {
         emit(VerifyCodeFail());
       }
@@ -94,8 +95,11 @@ class AuthCubit extends Cubit<AuthState> {
     );
     if (response is ApiSuccess) {
       emit(RegisterSuccess());
+      nameController.clear();
+      emailController.clear();
+      phoneController.clear();
     } else if (response is ApiFailure) {
-      emit(RegisterError());
+      emit(RegisterError(message: response.message));
     }
   }
 
@@ -108,12 +112,5 @@ class AuthCubit extends Cubit<AuthState> {
     } else if (response is ApiFailure) {
       emit(CompleteRegisterError());
     }
-  }
-
-  @override
-  Future<void> close() {
-    userPhoneNumberController.dispose();
-    optController.dispose();
-    return super.close();
   }
 }

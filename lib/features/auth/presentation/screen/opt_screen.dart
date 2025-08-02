@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:crazycar/core/class/local_storage.dart';
 import 'package:crazycar/core/constants/text_app.dart';
 import 'package:crazycar/core/enum/type_user.dart';
 import 'package:crazycar/core/extension/navigator_app.dart';
@@ -12,6 +11,8 @@ import 'package:crazycar/core/theme/textstyle_app.dart';
 import 'package:crazycar/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:crazycar/features/auth/presentation/widget/counter_widget.dart';
 import 'package:crazycar/features/auth/presentation/widget/opt_widget.dart';
+import 'package:crazycar/features/driver/home/presentation/screen/driver_home_screen.dart';
+import 'package:crazycar/features/rider/home/presentation/screen/rider_home_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,10 +39,16 @@ class OptScreen extends StatelessWidget {
               loadingWidget(context);
             } else if (state is VerifyCodeSuccess) {
               context.pop();
-              log("success");
+              if (typeUser == TypeUser.driver) {
+                context.pushRepalceMent(DriverHomeScreen());
+                LocalStorageApp.saveData("step", 1);
+              } else {
+                context.pushRepalceMent(RiderHomeScreen());
+                LocalStorageApp.saveData("step", 2);
+              }
             } else if (state is VerifyCodeFail) {
               context.pop();
-              errorWidget(context);
+              errorWidget(context: context);
             }
           },
           child: Padding(

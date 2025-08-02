@@ -39,7 +39,7 @@ class LoginScreen extends StatelessWidget {
               loadingWidget(context);
             } else if (state is LogInError) {
               context.pop();
-              errorWidget(context);
+              errorWidget(context: context, isText: true, text: state.message);
             }
           },
           child: Padding(

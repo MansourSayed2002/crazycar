@@ -8,8 +8,10 @@ class TablesDatabaseApp {
   static const String rideremail = 'rider_email';
   static const String riderVerifyCode = 'rider_verifycode';
   static const String riderImage = 'rider_image';
+  static const String riderActivation = 'rider_activation';
   static const String driverphone = 'driver_phone';
   static const String driveremail = 'driver_email';
   static const String driverVerifyCode = 'driver_verifycode';
   static const String driverImage = 'driver_image';
+  static const String driverActivation = 'driver_activation';
 }
