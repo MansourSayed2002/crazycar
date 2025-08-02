@@ -9,5 +9,6 @@ class ApiSuccess<T> extends ApiResult {
 
 class ApiFailure extends ApiResult {
   final StatusRequest statusRequest;
-  ApiFailure(this.statusRequest);
+  final String message;
+  ApiFailure({required this.statusRequest, required this.message});
 }

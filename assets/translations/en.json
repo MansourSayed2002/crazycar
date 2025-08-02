@@ -31,7 +31,11 @@
     "select":"Select",
     "verify":"Verification",
     "body_verify":"Enter the code to confirm your account",
-    "send_code":"Send Code"
-
+    "send_code":"Send Code",
+    "completed_success": "Your account has been created successfully. Please check your email for activation.",
+    "error":"Error",
+    "violate_unique_phone":"This phone number already exists",
+    "violate_unique_token":"You cannot use two accounts on the same application.",
+    "error_login":"Error Login"
 
 }

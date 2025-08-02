@@ -9,7 +9,10 @@ final class LogInLoading extends AuthState {}
 
 final class LogInSuccess extends AuthState {}
 
-final class LogInError extends AuthState {}
+final class LogInError extends AuthState {
+  final String message;
+  LogInError({required this.message});
+}
 
 final class VerifyCodeLoading extends AuthState {}
 
@@ -21,7 +24,10 @@ final class RegisterLoading extends AuthState {}
 
 final class RegisterSuccess extends AuthState {}
 
-final class RegisterError extends AuthState {}
+final class RegisterError extends AuthState {
+  final String message;
+  RegisterError({required this.message});
+}
 
 final class CompleteRegisterLoading extends AuthState {}
 

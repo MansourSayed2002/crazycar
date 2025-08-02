@@ -9,15 +9,18 @@ import 'package:crazycar/features/auth/domain/repo_abs/auth_repo_abs.dart';
 class AuthRepoImp extends AuthRepoAbs {
   @override
   Future logIn(String value, TypeUser type) async {
+        final prefix =
+        type == TypeUser.driver
+            ? TablesDatabaseApp.driver
+            : TablesDatabaseApp.rider;
     var response = await AuthApi.selectEq(
-      type == TypeUser.driver
-          ? TablesDatabaseApp.driver
-          : TablesDatabaseApp.rider,
-      type == TypeUser.driver
-          ? TablesDatabaseApp.driverphone
-          : TablesDatabaseApp.riderphone,
+    prefix,
+      "${prefix}_phone",
       value,
+      "${prefix}_activation",
+      1,
     );
+
     return response;
   }
 
@@ -34,30 +37,23 @@ class AuthRepoImp extends AuthRepoAbs {
 
   @override
   createVerifyAndSend(Map data, String value, TypeUser type) async {
-    await AuthApi.updateEq(
-      type == TypeUser.driver
-          ? TablesDatabaseApp.driver
-          : TablesDatabaseApp.rider,
-      data,
-      type == TypeUser.driver
-          ? TablesDatabaseApp.driverphone
-          : TablesDatabaseApp.riderphone,
-      value,
-    );
+    final prefix =
+        type == TypeUser.driver
+            ? TablesDatabaseApp.driver
+            : TablesDatabaseApp.rider;
+    await AuthApi.updateEq(prefix, data, "${prefix}_phone", value);
   }
 
   @override
   checkVerifyCode(String phone, TypeUser typeuser) async {
+    final prefix =
+        typeuser == TypeUser.driver
+            ? TablesDatabaseApp.driver
+            : TablesDatabaseApp.rider;
     var response = await AuthApi.selectFilter(
-      typeuser == TypeUser.driver
-          ? TablesDatabaseApp.driver
-          : TablesDatabaseApp.rider,
-      typeuser == TypeUser.driver
-          ? TablesDatabaseApp.driverVerifyCode
-          : TablesDatabaseApp.riderVerifyCode,
-      typeuser == TypeUser.driver
-          ? TablesDatabaseApp.driverphone
-          : TablesDatabaseApp.riderphone,
+      prefix,
+      "${prefix}_verifycode",
+      "${prefix}_phone",
       phone,
     );
     return response;
@@ -78,20 +74,14 @@ class AuthRepoImp extends AuthRepoAbs {
   uplaodImageUser(File file, String path, String phone, TypeUser type) async {
     try {
       await AuthApi.uploadFile(TablesDatabaseApp.imageBucket, path, file);
-
-      await AuthApi.updateEq(
-        type == TypeUser.driver
-            ? TablesDatabaseApp.driver
-            : TablesDatabaseApp.rider,
-        {
+      final prefix =
           type == TypeUser.driver
-                  ? TablesDatabaseApp.driverImage
-                  : TablesDatabaseApp.riderImage:
-              path,
-        },
-        type == TypeUser.driver
-            ? TablesDatabaseApp.driverphone
-            : TablesDatabaseApp.driverphone,
+              ? TablesDatabaseApp.driver
+              : TablesDatabaseApp.rider;
+      await AuthApi.updateEq(
+        prefix,
+        {"${prefix}_image": path},
+        "${prefix}_phone",
         phone,
       );
     } catch (e) {

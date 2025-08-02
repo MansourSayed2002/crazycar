@@ -9,4 +9,6 @@ class ImageApp {
 
 class AnimationApp {
   static const String error = 'assets/lottie/error.json';
+  static const String loadingMap = 'assets/lottie/loading_map.json';
+  static const String cong = 'assets/lottie/cong.json';
 }

@@ -21,10 +21,16 @@ class HeaderWidget extends StatelessWidget {
                 backgroundImage: AssetImage(ImageApp.logo),
               ),
               Gap(8.0.w),
-              Text(
-                "mansour sayed",
-                style: getBodyStyle(context: context),
-                overflow: TextOverflow.ellipsis,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "mansour sayed",
+                    style: getBodyStyle(context: context),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text("OnLine", style: getSmallStyle(context: context)),
+                ],
               ),
               Spacer(),
               Switch(

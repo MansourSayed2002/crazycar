@@ -9,11 +9,18 @@ class AuthApi {
     return result;
   }
 
-  static selectEq(String table, String column, String value) async {
+  static selectEq(
+    String table,
+    String column,
+    String value,
+    String column2,
+    int value2,
+  ) async {
     var response = await SupabaseConnect.supabase
         .from(table)
         .select()
-        .eq(column, value);
+        .eq(column, value)
+        .eq(column2, value2);
     return response;
   }
 
