@@ -29,18 +29,47 @@ class LocationApp {
     return await Geolocator.getCurrentPosition();
   }
 
-  static Future<Location?> searchPlace(String placeName) async {
+  static Future<List<Location>> searchPlace(String placeName) async {
     try {
       final locations = await locationFromAddress(placeName);
       if (locations.isNotEmpty) {
-        return locations.first;
+        return locations;
       } else {
         log('No results found for: $placeName');
-        return null;
+        return [];
       }
     } catch (e) {
       log('Error in searchPlace: $e');
+      return [];
+    }
+  }
+
+  static Future<Placemark?> getPlaceName(
+    double latitude,
+    double longitude,
+  ) async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        latitude,
+        longitude,
+      );
+
+      if (placemarks.isNotEmpty) {
+        final Placemark place = placemarks.first;
+        return place;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      log(" Error getting place name: $e");
       return null;
     }
   }
+}
+
+class LocationWithName {
+  final Location location;
+  final Placemark? placeMark;
+
+  LocationWithName({required this.location, required this.placeMark});
 }

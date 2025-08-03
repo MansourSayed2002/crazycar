@@ -29,6 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorApp.backgroundColorDark,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 16.0.h),
         child: Column(
@@ -37,7 +38,13 @@ class _SplashScreenState extends State<SplashScreen> {
             Spacer(),
             Image.asset(ImageApp.logo, width: 200.0.w),
             Gap(50.0.h),
-            Text(TextApp.appName, style: getTitleStyle(context: context)),
+            Text(
+              TextApp.appName,
+              style: getTitleStyle(
+                context: context,
+                color: ColorApp.whiteColor,
+              ),
+            ),
             Spacer(),
             Align(
               alignment: Alignment.centerLeft,

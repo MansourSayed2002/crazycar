@@ -1,4 +1,3 @@
-
 import 'package:crazycar/core/theme/theme_app.dart';
 
 import 'package:crazycar/features/intro/screen/splash_screen.dart';
@@ -18,7 +17,7 @@ class CrazycarApp extends StatelessWidget {
       builder: (_, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeApp.dark,
+          theme: ThemeApp.light,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
           locale: context.locale,

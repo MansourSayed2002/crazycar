@@ -140,8 +140,8 @@ class _MapWidgetState extends State<MapWidget> {
 
     final result = await LocationApp.searchPlace(query);
 
-    if (result != null) {
-      final newPoint = LatLng(result.latitude, result.longitude);
+    if (result.isNotEmpty) {
+      final newPoint = LatLng(result.first.latitude, result.first.longitude);
 
       setState(() {
         point = newPoint;

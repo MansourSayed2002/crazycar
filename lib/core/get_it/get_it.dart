@@ -6,6 +6,8 @@ import 'package:crazycar/features/auth/domain/usecase/create_verify_and_send_use
 import 'package:crazycar/features/auth/domain/usecase/login_usecase.dart';
 import 'package:crazycar/features/auth/domain/usecase/register_usecase.dart';
 import 'package:crazycar/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:crazycar/features/rider/home/domain/usecase/search_about_place_usecase.dart';
+import 'package:crazycar/features/rider/home/presentation/cubit/rider_home_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 final GetIt getIt = GetIt.instance;
@@ -24,6 +26,7 @@ Future<void> setUp() async {
   getIt.registerLazySingleton(
     () => CompleteRegisterUsecase(authRepoAbs: getIt()),
   );
+  getIt.registerLazySingleton(() => SearchAboutPlaceUsecase());
 
   //===============================CUBIT STATREMANGEMENT==========================
   getIt.registerLazySingleton(
@@ -34,5 +37,8 @@ Future<void> setUp() async {
       registerUsecase: getIt(),
       completeRegisterUsecase: getIt(),
     ),
+  );
+  getIt.registerLazySingleton(
+    () => RiderHomeCubit(searchAboutPlaceUsecase: getIt()),
   );
 }

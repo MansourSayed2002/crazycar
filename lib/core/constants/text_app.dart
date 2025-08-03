@@ -35,4 +35,5 @@ class TextApp {
   static const String violatesUniquePhone = 'violate_unique_phone';
   static const String violatesUniqueToken = 'violate_unique_token';
   static const String errorLogin = 'error_login';
+  static const String wheretogo = 'where_to_go';
 }
