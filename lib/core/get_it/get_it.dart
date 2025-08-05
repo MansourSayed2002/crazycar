@@ -6,6 +6,9 @@ import 'package:crazycar/features/auth/domain/usecase/create_verify_and_send_use
 import 'package:crazycar/features/auth/domain/usecase/login_usecase.dart';
 import 'package:crazycar/features/auth/domain/usecase/register_usecase.dart';
 import 'package:crazycar/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:crazycar/features/rider/home/data/repo_imp/rider_home_repo_imp.dart';
+import 'package:crazycar/features/rider/home/domain/repo_abs/rider_home_repo_abs.dart';
+import 'package:crazycar/features/rider/home/domain/usecase/get_nearby_driver_usecase.dart';
 import 'package:crazycar/features/rider/home/domain/usecase/search_about_place_usecase.dart';
 import 'package:crazycar/features/rider/home/presentation/cubit/rider_home_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -15,6 +18,8 @@ final GetIt getIt = GetIt.instance;
 Future<void> setUp() async {
   //===============================REPOSITORY=====================================
   getIt.registerLazySingleton<AuthRepoAbs>(() => AuthRepoImp());
+  getIt.registerLazySingleton<RiderHomeRepoAbs>(() => RiderHomeRepoImp());
+
   //===============================USECASE========================================
   getIt.registerLazySingleton(() => LoginUsecase(authRepoAbs: getIt()));
   getIt.registerLazySingleton(
@@ -27,6 +32,9 @@ Future<void> setUp() async {
     () => CompleteRegisterUsecase(authRepoAbs: getIt()),
   );
   getIt.registerLazySingleton(() => SearchAboutPlaceUsecase());
+  getIt.registerLazySingleton(
+    () => GetNearbyDriverUsecase(riderHomeRepoAbs: getIt()),
+  );
 
   //===============================CUBIT STATREMANGEMENT==========================
   getIt.registerLazySingleton(
@@ -39,6 +47,9 @@ Future<void> setUp() async {
     ),
   );
   getIt.registerLazySingleton(
-    () => RiderHomeCubit(searchAboutPlaceUsecase: getIt()),
+    () => RiderHomeCubit(
+      searchAboutPlaceUsecase: getIt(),
+      getNearbyDriverUsecase: getIt(),
+    ),
   );
 }

@@ -19,7 +19,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     getIt<RiderHomeCubit>().searchFromController.text =
-        widget.placemark!.locality.toString();
+        widget.placemark?.locality ?? "";
     super.initState();
   }
 

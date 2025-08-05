@@ -1,4 +1,4 @@
-import 'package:crazycar/core/class/location_app.dart';
+import 'package:crazycar/core/constants/image_app.dart';
 import 'package:crazycar/core/constants/text_app.dart';
 import 'package:crazycar/core/extension/navigator_app.dart';
 import 'package:crazycar/core/get_it/get_it.dart';
@@ -12,8 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
+
 import 'package:latlong2/latlong.dart';
 
 class RiderHomeScreen extends StatelessWidget {
@@ -22,7 +21,7 @@ class RiderHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: getIt<RiderHomeCubit>(),
+      value: getIt<RiderHomeCubit>()..getnearbydriver(),
       child: Scaffold(body: CustomMapWidget()),
     );
   }
@@ -36,85 +35,110 @@ class CustomMapWidget extends StatefulWidget {
 }
 
 class _CustomMapWidgetState extends State<CustomMapWidget> {
-  late LatLng point;
-  Position? position;
   late MapController mapController;
-  Placemark? placeMarket;
+
   @override
   void initState() {
     mapController = MapController();
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      position = await LocationApp.determinePosition();
-      placeMarket = await LocationApp.getPlaceName(
-        position!.latitude,
-        position!.longitude,
-      );
-      point = LatLng(position!.latitude, position!.longitude);
-      setState(() {});
-    });
+  }
+
+  @override
+  void dispose() {
+    mapController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return position == null
-        ? LaodingMapWidget()
-        : Stack(
-          children: [
-            FlutterMap(
-              mapController: mapController,
-              options: MapOptions(
-                initialZoom: 13.0,
-                initialCenter: LatLng(position!.latitude, position!.longitude),
-              ),
-              children: [
-                TileLayer(
-                  urlTemplate: dotenv.env['URL_TEMPLATE'].toString(),
-                  userAgentPackageName:
-                      dotenv.env['USER_AGENT_PACKAGE_NAME'].toString(),
-                ),
-                MarkerLayer(
-                  markers: [
-                    Marker(
-                      point: point,
-                      child: Icon(
-                        Icons.location_on,
-                        color: ColorApp.fieldColorDark,
+    return BlocBuilder<RiderHomeCubit, RiderHomeState>(
+      builder: (context, state) {
+        if (state is RiderHomeSuccess) {
+          final markers = state.data;
+          final point = LatLng(
+            state.position!.latitude,
+            state.position!.longitude,
+          );
+          return Stack(
+            children: [
+              FlutterMap(
+                mapController: mapController,
+                options: MapOptions(initialZoom: 16.0, initialCenter: point),
+                children: [
+                  TileLayer(
+                    urlTemplate: dotenv.env['URL_TEMPLATE'].toString(),
+                    userAgentPackageName:
+                        dotenv.env['USER_AGENT_PACKAGE_NAME'].toString(),
+                  ),
+                  MarkerLayer(
+                    markers: [
+                      Marker(
+                        point: point,
+                        child: Image.asset(
+                          ImageApp.pin,
+                          width: 60.0.w,
+                          height: 60.0.h,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ],
+                  ),
+                  MarkerLayer(
+                    markers: List.generate(
+                      markers.length,
+                      (index) => Marker(
+                        point: LatLng(
+                          markers[index]['latitude'],
+                          markers[index]['longitude'],
+                        ),
+                        child: Image.asset(
+                          ImageApp.car,
+                          width: 60.0.w,
+                          height: 60.0.h,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
-                  ],
-                ),
-              ],
-            ),
-            Positioned(
-              bottom: 10.0.h,
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.0.w,
-                  vertical: 10.0.h,
-                ),
-                width: 350.0.w,
-                height: 100.0.h,
-                alignment: Alignment.center,
-                margin: EdgeInsets.symmetric(horizontal: 20.0.w),
-                decoration: BoxDecoration(
-                  color: ColorApp.fieldColorDark,
-                  borderRadius: BorderRadius.circular(15.0.r),
-                ),
-                child: TextFormField(
-                  readOnly: true,
-                  onTap: () {
-                    context.push(SearchScreen(placemark: placeMarket));
-                  },
-                  decoration: InputDecoration(
-                    fillColor: ColorApp.fieldColorDark,
-                    hintText: TextApp.wheretogo.tr(),
-                    prefixIcon: Icon(Icons.search, color: ColorApp.whiteColor),
+                  ),
+                ],
+              ),
+              Positioned(
+                bottom: 10.0.h,
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.0.w,
+                    vertical: 10.0.h,
+                  ),
+                  width: 350.0.w,
+                  height: 100.0.h,
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.symmetric(horizontal: 20.0.w),
+                  decoration: BoxDecoration(
+                    color: ColorApp.fieldColorDark,
+                    borderRadius: BorderRadius.circular(15.0.r),
+                  ),
+                  child: TextFormField(
+                    readOnly: true,
+                    onTap: () {
+                      context.push(SearchScreen(placemark: state.placemark));
+                    },
+                    decoration: InputDecoration(
+                      fillColor: ColorApp.fieldColorDark,
+                      hintText: TextApp.wheretogo.tr(),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: ColorApp.whiteColor,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        );
+            ],
+          );
+        } else {
+          return LaodingMapWidget();
+        }
+      },
+    );
   }
 }

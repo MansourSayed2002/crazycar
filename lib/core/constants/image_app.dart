@@ -5,6 +5,8 @@ class ImageApp {
   static const String page3 = 'assets/images/identity.png';
   static const String driver = 'assets/images/driver.png';
   static const String rider = 'assets/images/rider.png';
+  static const String car = 'assets/images/car.png';
+  static const String pin = 'assets/images/pin.png';
 }
 
 class AnimationApp {
