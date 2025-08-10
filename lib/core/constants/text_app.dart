@@ -36,4 +36,5 @@ class TextApp {
   static const String violatesUniqueToken = 'violate_unique_token';
   static const String errorLogin = 'error_login';
   static const String wheretogo = 'where_to_go';
+  static const String noDriverFound = 'no_driver_found';
 }

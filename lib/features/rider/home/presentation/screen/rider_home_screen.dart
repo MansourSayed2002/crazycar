@@ -1,18 +1,13 @@
 import 'package:crazycar/core/constants/image_app.dart';
-import 'package:crazycar/core/constants/text_app.dart';
-import 'package:crazycar/core/extension/navigator_app.dart';
 import 'package:crazycar/core/get_it/get_it.dart';
-import 'package:crazycar/core/theme/color_app.dart';
 import 'package:crazycar/features/driver/home/presentation/widget/laoding_map_widget.dart';
 import 'package:crazycar/features/rider/home/presentation/cubit/rider_home_cubit.dart';
-import 'package:crazycar/features/rider/home/presentation/screen/search_screen.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:crazycar/features/rider/home/presentation/widget/baner_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:latlong2/latlong.dart';
 
 class RiderHomeScreen extends StatelessWidget {
@@ -52,6 +47,11 @@ class _CustomMapWidgetState extends State<CustomMapWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RiderHomeCubit, RiderHomeState>(
+      buildWhen:
+          (previous, current) =>
+              current is RiderHomeSuccess ||
+              current is RiderHomeLoading ||
+              current is RiderHomeError,
       builder: (context, state) {
         if (state is RiderHomeSuccess) {
           final markers = state.data;
@@ -102,37 +102,7 @@ class _CustomMapWidgetState extends State<CustomMapWidget> {
                   ),
                 ],
               ),
-              Positioned(
-                bottom: 10.0.h,
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.0.w,
-                    vertical: 10.0.h,
-                  ),
-                  width: 350.0.w,
-                  height: 100.0.h,
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.symmetric(horizontal: 20.0.w),
-                  decoration: BoxDecoration(
-                    color: ColorApp.fieldColorDark,
-                    borderRadius: BorderRadius.circular(15.0.r),
-                  ),
-                  child: TextFormField(
-                    readOnly: true,
-                    onTap: () {
-                      context.push(SearchScreen(placemark: state.placemark));
-                    },
-                    decoration: InputDecoration(
-                      fillColor: ColorApp.fieldColorDark,
-                      hintText: TextApp.wheretogo.tr(),
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: ColorApp.whiteColor,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              BanerSearchWidget(placeMarket: state.placemark),
             ],
           );
         } else {

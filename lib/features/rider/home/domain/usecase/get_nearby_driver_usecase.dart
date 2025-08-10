@@ -14,6 +14,7 @@ class GetNearbyDriverUsecase {
       final response = await riderHomeRepoAbs.getNearbyDrivers({
         "target_longitude": longitude,
         "target_latitude": latitude,
+        "radius_meters": 3000.0,
       });
       if (response.isNotEmpty) {
         return ApiSuccess(response);

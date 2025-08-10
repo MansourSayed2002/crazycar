@@ -6,14 +6,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 class SearchLocationWidget extends StatelessWidget {
-  const SearchLocationWidget({super.key});
-
+  const SearchLocationWidget({
+    super.key,
+    required this.searchFromController,
+    required this.searchToController,
+  });
+  final TextEditingController searchFromController;
+  final TextEditingController searchToController;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         TextFormField(
-          controller: getIt<RiderHomeCubit>().searchFromController,
+          controller: searchFromController,
           decoration: InputDecoration(
             prefixIcon: CustomIconShadow(
               icon: Icons.circle,
@@ -23,9 +28,9 @@ class SearchLocationWidget extends StatelessWidget {
         ),
         Gap(10.0.h),
         TextFormField(
-          controller: getIt<RiderHomeCubit>().searchToController,
+          controller: searchToController,
           onFieldSubmitted: (value) {
-            getIt<RiderHomeCubit>().searchPlace();
+            getIt<RiderHomeCubit>().searchPlace(searchFromController.text);
           },
           decoration: InputDecoration(
             prefixIcon: CustomIconShadow(

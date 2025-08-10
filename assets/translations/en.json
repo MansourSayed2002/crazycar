@@ -37,5 +37,7 @@
     "violate_unique_phone":"This phone number already exists",
     "violate_unique_token":"You cannot use two accounts on the same application.",
     "error_login":"Error Login",
-    "where_to_go":"Where do you want to go?"
+    "where_to_go":"Where do you want to go?",
+    "no_driver_found":"No driver found"
+
 }

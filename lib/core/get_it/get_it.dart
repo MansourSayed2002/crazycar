@@ -9,6 +9,7 @@ import 'package:crazycar/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:crazycar/features/rider/home/data/repo_imp/rider_home_repo_imp.dart';
 import 'package:crazycar/features/rider/home/domain/repo_abs/rider_home_repo_abs.dart';
 import 'package:crazycar/features/rider/home/domain/usecase/get_nearby_driver_usecase.dart';
+import 'package:crazycar/features/rider/home/domain/usecase/request_trip_usecase.dart';
 import 'package:crazycar/features/rider/home/domain/usecase/search_about_place_usecase.dart';
 import 'package:crazycar/features/rider/home/presentation/cubit/rider_home_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -35,6 +36,9 @@ Future<void> setUp() async {
   getIt.registerLazySingleton(
     () => GetNearbyDriverUsecase(riderHomeRepoAbs: getIt()),
   );
+  getIt.registerLazySingleton(
+    () => RequestTripUsecase(riderHomeRepoAbs: getIt()),
+  );
 
   //===============================CUBIT STATREMANGEMENT==========================
   getIt.registerLazySingleton(
@@ -50,6 +54,7 @@ Future<void> setUp() async {
     () => RiderHomeCubit(
       searchAboutPlaceUsecase: getIt(),
       getNearbyDriverUsecase: getIt(),
+      requestTripUsecase: getIt(),
     ),
   );
 }

@@ -37,5 +37,6 @@
     "violate_unique_phone":"الرقم موجود بالفعل",
     "violate_unique_token":"لا يمكنك استخدام حسابين على نفس التطبيق.",
     "error_login":"خطأ في تسجيل الدخول",
-    "where_to_go": "إلى أين تريد أن تذهب؟"
+    "where_to_go": "إلى أين تريد أن تذهب؟",
+    "no_driver_found":"لم يتم ايجاد سائق "
 }

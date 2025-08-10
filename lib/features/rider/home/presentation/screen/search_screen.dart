@@ -16,11 +16,19 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  TextEditingController searchFromController = TextEditingController();
+  TextEditingController searchToController = TextEditingController();
   @override
   void initState() {
-    getIt<RiderHomeCubit>().searchFromController.text =
-        widget.placemark?.locality ?? "";
+    searchFromController.text = widget.placemark?.locality ?? "";
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    searchFromController.dispose();
+    searchToController.dispose();
+    super.dispose();
   }
 
   @override
@@ -33,29 +41,49 @@ class _SearchScreenState extends State<SearchScreen> {
           padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 16.0.h),
           child: Column(
             children: [
-              SearchLocationWidget(),
+              SearchLocationWidget(
+                searchFromController: searchFromController,
+                searchToController: searchToController,
+              ),
               Gap(20.0.h),
               BlocConsumer<RiderHomeCubit, RiderHomeState>(
-                listener: (context, state) {},
+                buildWhen:
+                    (previous, current) =>
+                        current is SearchSuccess ||
+                        current is SearchError ||
+                        current is SearchLoading,
+                listener: (context, state) {
+                  if (state is SearchSuccess) {
+                  } else if (state is SearchError) {
+                  } else if (state is SearchLoading) {}
+                },
                 builder: (context, state) {
-                  return state is SearchSuccess
-                      ? Expanded(
-                        child: ListView.builder(
-                          itemCount: state.locations.length,
-                          itemBuilder:
-                              (context, index) => ListTile(
-                                title: Text(
-                                  state.locations[index].placeMark?.locality ??
-                                      "",
-                                ),
-                                subtitle: Text(
-                                  state.locations[index].placeMark?.street ??
-                                      "",
-                                ),
+                  final cubit = getIt<RiderHomeCubit>();
+                  if (state is SearchSuccess) {
+                    final loc = state.locations;
+                    return Expanded(
+                      child: ListView.builder(
+                        itemCount: state.locations.length,
+                        itemBuilder:
+                            (context, index) => ListTile(
+                              onTap: () {
+                                if (cubit.isScearch == false) {
+                                  cubit.requestTrips(loc[index]);
+                                }
+                                // context.pop();
+                              },
+                              title: Text(
+                                state.locations[index].placeMark?.locality ??
+                                    "",
                               ),
-                        ),
-                      )
-                      : SizedBox.shrink();
+                              subtitle: Text(
+                                state.locations[index].placeMark?.street ?? "",
+                              ),
+                            ),
+                      ),
+                    );
+                  }
+                  return SizedBox.shrink();
                 },
               ),
             ],
