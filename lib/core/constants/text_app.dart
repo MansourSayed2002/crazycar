@@ -37,4 +37,7 @@ class TextApp {
   static const String errorLogin = 'error_login';
   static const String wheretogo = 'where_to_go';
   static const String noDriverFound = 'no_driver_found';
+  static const String noInternet = 'No Internet Connection';
+  static const String noInternetSub =
+      'Please check your network settings and try again.';
 }

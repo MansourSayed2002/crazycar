@@ -12,6 +12,7 @@ class SearchAboutPlaceUsecase {
           element.latitude,
           element.longitude,
         );
+
         result.add(LocationWithName(location: element, placeMark: placemark));
       }
       if (response.isNotEmpty) {

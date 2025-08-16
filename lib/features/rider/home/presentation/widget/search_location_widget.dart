@@ -30,7 +30,7 @@ class SearchLocationWidget extends StatelessWidget {
         TextFormField(
           controller: searchToController,
           onFieldSubmitted: (value) {
-            getIt<RiderHomeCubit>().searchPlace(searchFromController.text);
+            getIt<RiderHomeCubit>().searchPlace(searchToController.text);
           },
           decoration: InputDecoration(
             prefixIcon: CustomIconShadow(

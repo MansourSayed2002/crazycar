@@ -1,3 +1,4 @@
+import 'package:crazycar/core/extension/navigator_app.dart';
 import 'package:crazycar/core/get_it/get_it.dart';
 import 'package:crazycar/features/rider/home/presentation/cubit/rider_home_cubit.dart';
 import 'package:crazycar/features/rider/home/presentation/widget/search_location_widget.dart';
@@ -69,8 +70,9 @@ class _SearchScreenState extends State<SearchScreen> {
                               onTap: () {
                                 if (cubit.isScearch == false) {
                                   cubit.requestTrips(loc[index]);
+                                  context.pop();
+                                  
                                 }
-                                // context.pop();
                               },
                               title: Text(
                                 state.locations[index].placeMark?.locality ??

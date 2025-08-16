@@ -7,6 +7,7 @@ class ImageApp {
   static const String rider = 'assets/images/rider.png';
   static const String car = 'assets/images/car.png';
   static const String pin = 'assets/images/pin.png';
+  static const String offline = 'assets/images/offline.png';
 }
 
 class AnimationApp {

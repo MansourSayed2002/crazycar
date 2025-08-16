@@ -53,7 +53,6 @@ class LocationApp {
         latitude,
         longitude,
       );
-
       if (placemarks.isNotEmpty) {
         final Placemark place = placemarks.first;
         return place;
